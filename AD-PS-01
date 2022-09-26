@@ -1,0 +1,12 @@
+#Set Static IP, Subnet Mask, Default Gateway, DNS and backup
+Start-Job {echo 8 1 1 S 10.0.56.x 255.255.255.0 10.0.56.1 2 127.0.0.1 OK 8.8.8.8 OK 4 15 | Sconfig.cmd}
+
+#Updates Windows
+Set-ExecutionPolicy Unrestricted -Scope CurrentUser
+Import-Module PSWindowsUpdate -Force
+Get-Package -Name PSWindowsUpdate
+Get-WindowsUpdate -Install
+
+#Renames Computer
+Rename-Computer -NewName PS-Tester
+Restart-Computer -Force
