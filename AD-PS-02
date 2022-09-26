@@ -1,0 +1,15 @@
+#Adds ADDS Server Role
+Import-Module ServerManager
+Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
+
+#Installs new Forest
+Import-Module ADDSDeployment
+
+#Sets Temp Password
+$Password = ConvertTo-SecureString -AsPlainText -String [xxxx] -Force
+
+#Configs Forest
+Start-Job {echo [xxxx].com $Password Y | Install-ADDSForest}
+
+#Restart
+Restart-Computer -Force
